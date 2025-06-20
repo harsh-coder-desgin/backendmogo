@@ -1,6 +1,6 @@
 // require('dotenv').config({path:'/env'})
 import { app } from "./app.js"
-// import cors from 'cors';
+import cors from 'cors';
 
 
 
@@ -22,7 +22,10 @@ dotenv.config({
 //   origin: 'https://aurcode.vercel.app', // or ['http://localhost:5173', 'https://your-frontend.vercel.app']
 //   credentials: true, // only if using cookies
 // }));
-
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+}));
 connectDB()
 .then(()=>{
     app.listen(process.env.PORT || 8000,()=>{
