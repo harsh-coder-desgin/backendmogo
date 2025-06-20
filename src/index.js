@@ -17,7 +17,7 @@ const app = express()
 app.use("/api/v1/users",userRouter)
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: "https://frontendmogodb.vercel.app",
   credentials: true
 }));
 
