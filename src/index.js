@@ -2,9 +2,19 @@
 import express from "express"
 import cors from "cors"
 import cookieParser from "cookie-parser"
-const app = express()
 import dotenv from "dotenv"
 import connectDB from "./db/index.js";
+import userRouter from "./routes/user.routes.js"
+
+dotenv.config({
+    path:'./.env'
+}) 
+
+const app = express()
+
+// connectDB()
+
+app.use("/api/v1/users",userRouter)
 
 app.use(cors({
   origin: "http://localhost:5173",
@@ -16,9 +26,6 @@ app.use(express.urlencoded({extended:true,limit:"16kb"}))
 app.use(express.static("public"))
 app.use(cookieParser())
 
-dotenv.config({
-    path:'./.env'
-}) 
 
 connectDB()
 .then(()=>{
@@ -33,7 +40,4 @@ connectDB()
 .catch((err)=>{
     console.log("mongo db connection failed",err)
 })
-
-import userRouter from "./routes/user.routes.js"
-
-app.use("/api/v1/users",userRouter)
+export default app
